@@ -13,7 +13,6 @@ session_start();
         $email = $_POST['email'];
         $password = $_POST['password'];
         $user_role = $_POST['user_role'];
-        $address = $_POST['address'];
 
         $target_dir = "uploads/";
         $target_file = $target_dir . time() . basename($_FILES["fileToUpload"]["name"]);
@@ -22,21 +21,17 @@ session_start();
             $image = time() . basename($_FILES["fileToUpload"]["name"]);
             $error_msg = "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
         } else {
-            $error_msg = "Sorry, there was an error uploading your LOGO.";
+            $error_msg = "Sorry, there was an error uploading your image.";
         }
 
 
-        $query = "insert into users (user_name,email,password,phone,user_role,category,balance,address,image) values ('$user_name','$email','$password','$phone','$user_role','',0,'$address','$image')";
+        $query = "insert into users (user_name,email,password,phone,user_role,balance,image) values ('$user_name','$email','$password','$phone','$user_role',0,'$image')";
         $result = mysqli_query($con, $query);
 
         if($result) {
-            if($user_role == 'labour') {
-              $_SESSION['user_id'] = $user_name;
-              header('Location: labour-extra.php');
-            } else {
-              $_SESSION['user_id'] = $user_name;
-              header('Location: index.php');
-            }
+            $_SESSION['user_id'] = $user_name;
+            header('Location: index.php');
+            
         } else {
             $error_msg =  "username or email is already taken!";
         }
@@ -50,7 +45,7 @@ session_start();
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>The Cattle Farm</title>
+  <title>Alefak</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -79,20 +74,23 @@ session_start();
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top header-inner-pages">
-    <div class="container-fluid d-flex align-items-center justify-content-between">
+    <div class="container d-flex align-items-center">
 
-    <h1 class="logo"><a href="index.php">TheCattleFarm</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      <a href="index.php" class="logo mr-auto"><img src="assets/img/logo.jpg" alt="" class="img-fluid"></a>
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li><a href="index.php">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="blog.html">Blog</a></li>
           <li class="active"><a href="signup.php">Signup</a></li>
+          <li><a href="login.php">Login</a></li>
+
         </ul>
       </nav><!-- .nav-menu -->
-
-      <a href="login.php" class="get-started-btn scrollto">Login Now</a>
 
     </div>
   </header><!-- End Header -->
@@ -122,24 +120,22 @@ session_start();
         </div>
         </div>
 
-        <textarea class="form-control mb-3" rows="5" name="address" placeholder="Your Address.."></textarea>
-
         <label for="fileToUpload">Your Image (Required): </label>
         <input type="file" name="fileToUpload" class="mb-3" id="fileToUpload" required> <br>
 
         <div class="form-check mb-1 mt-3">
             <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="user_role" value="farm">Farm
+                <input type="radio" class="form-check-input" name="user_role" value="owner">Pet Owner
             </label>
         </div>
         <div class="form-check mb-1">
             <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="user_role" value="labour">Labour
+                <input type="radio" class="form-check-input" name="user_role" value="vet">Vet
             </label>
         </div>
         <div class="form-check mb-1">
             <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="user_role" value="customer">Customer
+                <input type="radio" class="form-check-input" name="user_role" value="delivery">Delivery
             </label>
         </div>
 

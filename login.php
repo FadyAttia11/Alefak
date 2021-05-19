@@ -13,7 +13,7 @@ session_start();
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>The Cattle Farm</title>
+  <title>Alefak</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -42,20 +42,23 @@ session_start();
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top header-inner-pages">
-    <div class="container-fluid d-flex align-items-center justify-content-between">
+    <div class="container d-flex align-items-center">
 
-    <h1 class="logo"><a href="index.php">TheCattleFarm</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      <a href="index.php" class="logo mr-auto"><img src="assets/img/logo.jpg" alt="" class="img-fluid"></a>
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li><a href="index.php">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="blog.html">Blog</a></li>
           <li><a href="signup.php">Signup</a></li>
+          <li class="active"><a href="login.php">Login</a></li>
+
         </ul>
       </nav><!-- .nav-menu -->
-
-      <a href="login.php" class="get-started-btn scrollto">Login Now</a>
 
     </div>
   </header><!-- End Header -->
