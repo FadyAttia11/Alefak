@@ -61,7 +61,7 @@ session_start();
           <li><a href="pet-shop.php">Pet Shop</a></li>
           <li><a href="all-vets.php">All Vets</a></li>
           <li><a href="sell-pets.php">Sell Pets</a></li>
-          <li class="active"><a href="buy-pets.php">Buy Pets</a></li>
+          <li class="active"><a href="buy-pets.php?category=All">Buy Pets</a></li>
           <li><a href="my-profile-owner.php">My Profile</a></li>
           <li><a href="#">Pet Owner: <?php echo $user_data['user_name'] ?></a></li>
           <li><a href="logout.php">Logout</a></li>
