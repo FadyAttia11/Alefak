@@ -5,16 +5,16 @@ session_start();
     include("functions.php");
 
     $user_data = check_login($con);
-    $buyer_name = $user_data['user_name'];
-    $pet_id = $_GET["id"];
+    $user_name = $user_data['user_name'];
+    $category = $_GET["category"];
 
-    $product_info_query = "select * from pets where id = '$pet_id'";
-    $product_info = mysqli_query($con, $product_info_query);
-
-    if($product_info) {
-        $pet_data = mysqli_fetch_assoc($product_info);
+    if($category == 'All') {
+        $all_pets_query = "select * from pets where owner_name = '$user_name'";
+        $all_pets = mysqli_query($con, $all_pets_query);
+    } else {
+        $all_pets_query = "select * from pets where category = '$category' and owner_name = '$user_name'";
+        $all_pets = mysqli_query($con, $all_pets_query);
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -62,8 +62,8 @@ session_start();
           <li><a href="pet-shop.php">Pet Shop</a></li>
           <li><a href="all-vets.php">All Vets</a></li>
           <li><a href="sell-pets.php">Sell Pets</a></li>
-          <li class="active"><a href="buy-pets.php?category=All">Buy Pets</a></li>
-          <li><a href="my-pets.php?category=All">My Pets</a></li>
+          <li><a href="buy-pets.php?category=All">Buy Pets</a></li>
+          <li class="active"><a href="my-pets.php?category=All">My Pets</a></li>
           <li><a href="#">Pet Owner: <?php echo $user_data['user_name'] ?></a></li>
           <li><a href="logout.php">Logout</a></li>
 
@@ -80,73 +80,40 @@ session_start();
       <div class="container">
 
         <ol>
-          <li><a href="index.html">Home</a></li>
-          <li>My Profile</li>
+          <li><a href="index.php">Home</a></li>
+          <li>Buy Pets</li>
         </ol>
-        <h2>My Profile</h2>
+        <h2>Choose Category: <a href="buy-pets.php?category=All">All</a> - <a href="buy-pets.php?category=Dogs">Dogs</a> - <a href="buy-pets.php?category=Cats">Cats</a> - <a href="buy-pets.php?category=Fish">Fish</a> - <a href="buy-pets.php?category=Birds">Birds</a> - <a href="buy-pets.php?category=Turtles">Turtles</a></h2>
 
       </div>
     </section><!-- End Breadcrumbs -->
 
     <!-- ======= Portfolio Details Section ======= -->
     <section id="portfolio-details" class="portfolio-details">
-      <div class="container">
+    <div class="container">
 
-        <div class="portfolio-details-container">
+    <h3>Buy Pets</h3>
+    <div class="row">
+            <?php
+                while($row = mysqli_fetch_array($all_pets)) {
+            ?>
 
-        <img src=<?php echo "uploads/".$pet_data['image'] ?> class="img-fluid" alt="">
+            <div class="col-6">
+                <a href=<?php echo "pet.php?id=". $row['id'] ?>><img src=<?php echo "./uploads/".$row['image'] ?> alt="" style="width: 50%; border: 1px solid #cda45e;"></a>
+                <h5>Name: <?php echo $row['pet_name'] ?></h5>
+                <p>Breed: <?php echo $row['breed'] ?></p>
+            </div>  
 
-          <div class="portfolio-info">
-            <h3>Pet information</h3>
-            <ul>
-              <li><strong>Pet Name</strong>: <?php echo $pet_data['pet_name'] ?></li>
-              <li><strong>Category</strong>: <?php echo $pet_data['category'] ?></li>
-              <li><strong>Breed</strong>: <?php echo $pet_data['breed'] ?></li>
-              <li><strong>Minimum Price</strong>: <?php echo $pet_data['min_price'] ?> L.E</li>
-              <li><strong>Available Time</strong>: <?php echo $pet_data['time'] ?></li>
-              <li><strong>Date Added</strong>: <?php echo $pet_data['date'] ?></li>
-            </ul>
-          </div>
-        </div>
-
-        <?php
-            $existing_bid_query = "select * from auctions where pet_id = '$pet_id' and buyer_name = '$buyer_name'";
-            $existing_bid = mysqli_query($con, $existing_bid_query);
-
-            if($existing_bid && mysqli_num_rows($existing_bid) > 0) {
-        ?>
-        <h2>You Had Already Bid on This Pet!</h2>
-        <?php } else { ?>
-
-        <div class="portfolio-description">
-            <h2>Bid on This Pet</h2>
-            <form method="post">
-                <input type="number" class="form-control mb-3" placeholder="Your Bid" name="bid" required>
-                <input type="submit" value="Submit Bid" class="btn btn-primary">
-                <?php
-                    if($_SERVER['REQUEST_METHOD'] == "POST") {
-                        $bid = $_POST['bid'];
-                        
-                        $query = "insert into auctions (pet_id,buyer_name,bid) values ('$pet_id','$buyer_name','$bid')";
-                        $result = mysqli_query($con, $query);
-
-                        if($result) {
-                            echo "successfully added your bid to the auction";
-                        } else {
-                            echo "error adding your bid to the auction";
-                        }
-                    }
-                ?>
-            </form>
-        </div>
-
-        <?php } ?>
+            <?php } ?>
+    </div>
+        
 
       </div>
     </section><!-- End Portfolio Details Section -->
 
   </main><!-- End #main -->
 
+ 
 
   <a href="#" class="back-to-top"><i class="ri-arrow-up-line"></i></a>
 
