@@ -81,9 +81,9 @@ session_start();
 
         <ol>
           <li><a href="index.php">Home</a></li>
-          <li>Buy Pets</li>
+          <li>My Pets</li>
         </ol>
-        <h2>Choose Category: <a href="buy-pets.php?category=All">All</a> - <a href="buy-pets.php?category=Dogs">Dogs</a> - <a href="buy-pets.php?category=Cats">Cats</a> - <a href="buy-pets.php?category=Fish">Fish</a> - <a href="buy-pets.php?category=Birds">Birds</a> - <a href="buy-pets.php?category=Turtles">Turtles</a></h2>
+        <h2>Choose Category: <a href="my-pets.php?category=All">All</a> - <a href="my-pets.php?category=Dogs">Dogs</a> - <a href="my-pets.php?category=Cats">Cats</a> - <a href="my-pets.php?category=Fish">Fish</a> - <a href="my-pets.php?category=Birds">Birds</a> - <a href="my-pets.php?category=Turtles">Turtles</a></h2>
 
       </div>
     </section><!-- End Breadcrumbs -->
@@ -92,14 +92,14 @@ session_start();
     <section id="portfolio-details" class="portfolio-details">
     <div class="container">
 
-    <h3>Buy Pets</h3>
+    <h3>My Pets</h3>
     <div class="row">
             <?php
                 while($row = mysqli_fetch_array($all_pets)) {
             ?>
 
             <div class="col-6">
-                <a href=<?php echo "pet.php?id=". $row['id'] ?>><img src=<?php echo "./uploads/".$row['image'] ?> alt="" style="width: 50%; border: 1px solid #cda45e;"></a>
+                <a href=<?php echo "my-pet.php?id=". $row['id'] ?>><img src=<?php echo "./uploads/".$row['image'] ?> alt="" style="width: 50%; border: 1px solid #cda45e;"></a>
                 <h5>Name: <?php echo $row['pet_name'] ?></h5>
                 <p>Breed: <?php echo $row['breed'] ?></p>
             </div>  
