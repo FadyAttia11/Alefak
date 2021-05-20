@@ -80,10 +80,10 @@ session_start();
       <div class="container">
 
         <ol>
-          <li><a href="index.html">Home</a></li>
-          <li>My Profile</li>
+          <li><a href="index.php">Home</a></li>
+          <li>Pet Profile</li>
         </ol>
-        <h2>My Profile</h2>
+        <h2>Pet Name: <?php echo $pet_data['pet_name'] ?></h2>
 
       </div>
     </section><!-- End Breadcrumbs -->
