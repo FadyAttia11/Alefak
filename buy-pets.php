@@ -5,13 +5,14 @@ session_start();
     include("functions.php");
 
     $user_data = check_login($con);
+    $user_name = $user_data['user_name'];
     $category = $_GET["category"];
 
     if($category == 'All') {
-        $all_pets_query = "select * from pets";
+        $all_pets_query = "select * from pets where owner_name != '$user_name'";
         $all_pets = mysqli_query($con, $all_pets_query);
     } else {
-        $all_pets_query = "select * from pets where category = '$category'";
+        $all_pets_query = "select * from pets where category = '$category' and owner_name != '$user_name'";
         $all_pets = mysqli_query($con, $all_pets_query);
     }
 ?>
