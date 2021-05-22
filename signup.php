@@ -133,11 +133,7 @@ session_start();
                 <input type="radio" class="form-check-input" name="user_role" value="vet">Vet
             </label>
         </div>
-        <div class="form-check mb-1">
-            <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="user_role" value="delivery">Delivery
-            </label>
-        </div>
+
 
         
 

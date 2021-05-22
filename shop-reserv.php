@@ -6,7 +6,12 @@ session_start();
 
     $user_data = check_login($con);
 
-    $all_purchased_query = "select * from purchased join store on purchased.item_id = store.id join users on purchased.owner_name = users.user_name";
+    $all_purchased_query = 
+    "select purchased.id, purchased.owner_name, purchased.location, purchased.day, purchased.state, 
+    store.item_name, users.phone 
+    from purchased 
+    join store on purchased.item_id = store.id 
+    join users on purchased.owner_name = users.user_name";
     $all_purchased = mysqli_query($con, $all_purchased_query);
 ?>
 
@@ -85,28 +90,59 @@ session_start();
       <div class="container">
 
         <h3>Shop Reservations</h3>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Item Name</th>
-                <th>Owner Name</th>
-                <th>Owner Phone</th>
-                <th>Drop-off Location</th>
-                <th>Drop-off Time</th>
-            </tr>
-            </thead>
-            <tbody>
+        
             <?php
                 while($row = mysqli_fetch_array($all_purchased)) {
             ?>
 
-            <tr>
-                <td><?php echo $row['item_name'] ?></td>
-                <td><?php echo $row['owner_name'] ?></td>
-                <td>0<?php echo $row['phone'] ?></td>
-                <td><?php echo $row['location'] ?></td>
-                <td><?php echo $row['day'] ?></td>
-            </tr>
+            <div class="card col-5 ml-2">
+                <div class="card-body">
+                    <h5 class="card-title">Item Name: <?php echo $row['item_name'] ?></h5>
+                    <p class="card-text">Owner Name: <?php echo $row['owner_name'] ?></p>
+                    <p class="card-text">Owner Phone: 0<?php echo $row['phone'] ?></p>
+                    <p class="card-text">Drop-off Location: <?php echo $row['location'] ?></p>
+                    <p class="card-text">Drop-off Time: <?php echo $row['day'] ?></p>
+                    <?php 
+                        if($row['state'] == 'Not Assigned Yet') {
+                    ?>
+                    <form method="post">
+                    <input type="hidden" name="purchased_id" value=<?php echo $row['id'] ?>> 
+                    <select class="form-control mb-3" name="delivery_name" required>
+                        <option disabled selected value>Assign Delivery</option>
+                        <option>Sameh Hassan</option>
+                        <option>Osama Mansour</option>
+                        <option>Ragb Badr</option>
+                        <option>Mortada Marzouk</option>
+                        <option>Kareem Esmail</option>
+                    </select>   
+                    <button type="submit" class="btn btn-primary">Assign Delivery</button>
+                    <?php
+                        if($_SERVER['REQUEST_METHOD'] == "POST") {
+                            $delivery_name = $_POST['delivery_name'];
+                            $purchased_id = $_POST['purchased_id'];
+
+                            $query = "insert into delivery (delivery_name,purchased_id) values ('$delivery_name','$purchased_id')";
+                            $result = mysqli_query($con, $query);
+
+                            if($result) {
+                                $update_state_query = "update purchased set state = 'Pending Delivery Acceptance' where id = '$purchased_id'";
+                                $update_state = mysqli_query($con, $update_state_query);
+
+                                if($update_state) {
+                                    echo "Successfully assigned this to the delivery: ". $delivery_name;
+                                }
+                            } else {
+                                echo "Error adding your item!";
+                            }
+                        }
+                    ?>
+                    </form>
+                    <?php } ?>
+                </div>
+                <div class="card-footer">
+                    <p class="card-text">Delivery State: <?php echo $row['state'] ?></p>
+                </div>
+            </div>
 
             <?php } ?>
             

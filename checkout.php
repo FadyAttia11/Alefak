@@ -116,7 +116,7 @@ session_start();
                     $location = $_POST['location'];
                     $day = $_POST['day'];
 
-                    $add_purchased_query = "insert into purchased (item_id,owner_name,location,day) values ('$item_id','$user_name','$location','$day')";
+                    $add_purchased_query = "insert into purchased (item_id,owner_name,location,day,state) values ('$item_id','$user_name','$location','$day','Not Assigned Yet')";
                     $add_purchased = mysqli_query($con, $add_purchased_query);
 
                     if($add_purchased) {
