@@ -51,7 +51,7 @@ session_start();
       <ul>
           <li><a href="index.php">Home</a></li>
           <li class="active"><a href="new-shop.php">Add To Shop</a></li>
-          <li><a href="pet-shop.php">Pet Shop</a></li>
+          <li><a href="pet-shop-ad.php">Pet Shop</a></li>
           <li><a href="shop-reserv.php">Shop Reservations</a></li>
           <li><a href="vet-reserv.php">Vet Reservations</a></li>          
           <li><a href="#">Balance: <?php echo $user_data['balance'] ?> L.E</a></li>
