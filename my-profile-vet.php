@@ -111,7 +111,7 @@ session_start();
                 <div class="card col-5 ml-2" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Owner Name: <?php echo $row['owner_name'] ?></h5>
-                        <p class="card-text">Reservation Day: <?php echo $row['reserv_day'] ?> Acre</p>
+                        <p class="card-text">Reservation Day: <?php echo $row['reserv_day'] ?></p>
                         <p class="card-text">Reservation Time: <?php echo $row['reserv_time'] ?></p>
                     </div>
                 </div>
