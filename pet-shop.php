@@ -10,27 +10,20 @@ session_start();
     $all_store = mysqli_query($con, $all_store_query);
 
     if($_SERVER['REQUEST_METHOD'] == "POST") {
-        if(isset($_POST['all'])) {
-          $all_store_query = "select * from store";
-          $all_store = mysqli_query($con, $all_store_query);
-  
-        } else if(isset($_POST['nike'])) {
-          $all_store_query = "select * from store where brand = 'Nike'";
-          $all_store = mysqli_query($con, $all_store_query);
-  
-        } else if(isset($_POST['adidas'])) {
-          $all_store_query = "select * from store where brand = 'Adidas'";
-          $all_store = mysqli_query($con, $all_store_query);
-  
-        } else if(isset($_POST['zara'])) {
-          $all_store_query = "select * from store where brand = 'Zara'";
-          $all_store = mysqli_query($con, $all_store_query);
-  
-        } else if(isset($_POST['calvin'])) {
-          $all_store_query = "select * from store where brand = 'Calvin Klein'";
-          $all_store = mysqli_query($con, $all_store_query);
-        }
-    }
+      if(isset($_POST['all'])) {
+        $all_store_query = "select * from store";
+        $all_store = mysqli_query($con, $all_store_query);
+
+      } else if(isset($_POST['food'])) {
+        $all_store_query = "select * from store where category = 'Food'";
+        $all_store = mysqli_query($con, $all_store_query);
+
+      } else if(isset($_POST['accessories'])) {
+        $all_store_query = "select * from store where category = 'Accessories'";
+        $all_store = mysqli_query($con, $all_store_query);
+
+      }
+  }
 
 ?>
 
@@ -143,7 +136,7 @@ session_start();
                     <h4 class="card-title">
                         <a href="#"><?php echo $row['item_name'] ?></a>
                     </h4>
-                    <h5>$<?php echo $row['price'] ?></h5>
+                    <h5><?php echo $row['price'] ?> L.E</h5>
                     <p class="card-text"><?php echo $row['description'] ?></p>
                     </div>
                     <div class="card-footer">

@@ -93,7 +93,7 @@ session_start();
 <div class="container mb-5" style="max-width: 400px; margin-top: 100px;">
     <h1>Checkout</h1>
     <h3>for: <?php echo $current_product['item_name'] ?></h3>
-    <h5>price: <?php echo $current_product['price'] ?></h5>
+    <h5>price: <?php echo $current_product['price'] ?> L.E</h5>
     <?php
         if($_SERVER['REQUEST_METHOD'] == "POST") {
 
@@ -103,11 +103,11 @@ session_start();
             if($get_money && mysqli_num_rows($get_money) > 0) {
                 
                 $current_money = mysqli_fetch_assoc($get_money);
-                $updated_money = $current_money['money'] + $current_product['price'];
+                $updated_money = $current_money['balance'] + $current_product['price'];
 
                 // echo "Successfully purchased your product";
     
-                $add_money_query = "update users set money = '$updated_money' where user_role = 'admin'";
+                $add_money_query = "update users set balance = '$updated_money' where user_role = 'admin'";
                 $add_money = mysqli_query($con, $add_money_query);
     
                 if($add_money) {
