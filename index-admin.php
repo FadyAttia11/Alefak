@@ -50,11 +50,10 @@ session_start();
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li class="active"><a href="index.php">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#team">Team</a></li>
-          <li><a href="blog.html">Blog</a></li>
+          <li><a href="new-shop.php">Add To Shop</a></li>
+          <li><a href="pet-shop.php">Pet Shop</a></li>
+          <li><a href="shop-reserv.php">Shop Reservations</a></li>
+          <li><a href="vet-reserv.php">Vet Reservations</a></li>          
           <li><a href="#">Balance: <?php echo $user_data['balance'] ?> L.E</a></li>
           <li><a href="logout.php">Logout</a></li>
 
