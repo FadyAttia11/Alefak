@@ -50,11 +50,7 @@ session_start();
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li class="active"><a href="index.php">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#team">Team</a></li>
-          <li><a href="blog.html">Blog</a></li>
+          <li><a href="assigned-jobs.php">Assigned Jobs</a></li>
           <li><a href="#">Delivery: <?php echo $user_data['user_name'] ?></a></li>
           <li><a href="logout.php">Logout</a></li>
 
